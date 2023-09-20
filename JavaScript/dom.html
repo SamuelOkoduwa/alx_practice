@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	<title>Character Counter</title>
+	<style>
+		body {
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-family: 'Roboto', sans-serif;
+			flex-direction: column;
+		}
+		.content {
+			display: flex;
+			flex-direction: column;
+			
+		}
+	</style>
+</head>
+<body>
+	<div class="content">
+		<label for="">Character Counter</label>
+		<textarea id="characters-field" cols="30" rows="10">
+		</textarea>
+	</div>
+	<p id="display"></p>
+
+	<script>
+		// To determine the word count
+		let counter = 0;
+		const textArea = document.getElementById('characters-field');
+		// Ignore keys so as not to include on the count
+		const IgnoreKeys = ['Backspace', 'Shift', 'Control', 'CapsLock', 'Enter', 'Alt']
+		textArea.onkeydown = function (event) {
+			// display the output of the count
+			const output = document.getElementById('display');
+			output.textContent = `You have typed ${counter} character(s)`;
+			// condition to not include some keys in line 39
+			let keyStroke = event.key;
+			if (!IgnoreKeys.includes(keyStroke)) {
+				counter = counter + 1;
+			}
+			// condition not to count backspace and count negative numbers
+			else if (keyStroke === 'Backspace' && counter > 0) {
+				counter = counter - 1;
+			}
+			// To limit or countro the numbet of charaters e.g 60 characters
+			if (counter >= 60) {
+				alert(`Maximum charater exceed ${counter} character(s)`);
+				return;
+			}	
+
+		}
+	</script>
+</body>
+</html>
